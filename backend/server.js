@@ -1,24 +1,18 @@
-import authRoutes from "./routes/authRoutes.js";
 import express from "express";
-import { connectDB } from "./config/db.js";
 import dotenv from "dotenv";
 
+console.log("SERVER FILE EXECUTED");
+
 dotenv.config();
-connectDB();
 
 const app = express();
 
+app.get("/", (req, res) => {
+  res.send("Express + dotenv working");
+});
 
-app.get("/", (req,res) =>{
-    res.send("HabitForge API Running!")
-})
+const PORT = process.env.PORT || 8000;
 
-app.use("/api/auth", authRoutes);
-
-const port = 5000;
-app.listen(port, (req,res) => {
-    console.log(`Server running on port ${port}`)
-
-})
-console.log("MONGO_URI:", process.env.MONGO_URI);
-
+app.listen(PORT, () => {
+  console.log(`Express listening on ${PORT}`);
+});
